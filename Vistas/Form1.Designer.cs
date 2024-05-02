@@ -34,17 +34,17 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.memoria = new System.Windows.Forms.ComboBox();
+            this.procesadores = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.button1 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.label6 = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -97,20 +97,42 @@
             this.panel1.AccessibleName = "Configuraciones";
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.memoria);
+            this.panel1.Controls.Add(this.procesadores);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.numericUpDown3);
-            this.panel1.Controls.Add(this.numericUpDown2);
-            this.panel1.Controls.Add(this.numericUpDown1);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label5);
-            this.panel1.Location = new System.Drawing.Point(12, 53);
+            this.panel1.Location = new System.Drawing.Point(12, 52);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(319, 211);
+            this.panel1.Size = new System.Drawing.Size(339, 212);
             this.panel1.TabIndex = 9;
             this.panel1.Tag = "Configuraciones";
+            // 
+            // memoria
+            // 
+            this.memoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.memoria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.memoria.FormattingEnabled = true;
+            this.memoria.Location = new System.Drawing.Point(220, 52);
+            this.memoria.Name = "memoria";
+            this.memoria.Size = new System.Drawing.Size(96, 21);
+            this.memoria.TabIndex = 15;
+            this.memoria.SelectedIndexChanged += new System.EventHandler(this.memoria_SelectedIndexChanged);
+            // 
+            // procesadores
+            // 
+            this.procesadores.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.procesadores.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.procesadores.FormattingEnabled = true;
+            this.procesadores.Location = new System.Drawing.Point(220, 14);
+            this.procesadores.Name = "procesadores";
+            this.procesadores.Size = new System.Drawing.Size(96, 21);
+            this.procesadores.TabIndex = 14;
+            this.procesadores.SelectedIndexChanged += new System.EventHandler(this.procesadores_SelectedIndexChanged);
             // 
             // button2
             // 
@@ -128,20 +150,6 @@
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(96, 20);
             this.numericUpDown3.TabIndex = 12;
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(220, 53);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(96, 20);
-            this.numericUpDown2.TabIndex = 11;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(220, 12);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(96, 20);
-            this.numericUpDown1.TabIndex = 10;
             // 
             // button1
             // 
@@ -167,21 +175,30 @@
             this.label6.TabIndex = 10;
             this.label6.Text = "Configuraciones";
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(379, 52);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(501, 228);
+            this.dataGridView1.TabIndex = 11;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(892, 586);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Configuraciones";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -197,11 +214,12 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.NumericUpDown numericUpDown3;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox memoria;
+        private System.Windows.Forms.ComboBox procesadores;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 
