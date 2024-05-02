@@ -42,6 +42,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label7 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -183,11 +184,21 @@
             this.dataGridView1.Size = new System.Drawing.Size(501, 228);
             this.dataGridView1.TabIndex = 11;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(327, 387);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(92, 13);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "Prueba de commit";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(892, 586);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.panel1);
@@ -220,6 +231,7 @@
         private System.Windows.Forms.ComboBox memoria;
         private System.Windows.Forms.ComboBox procesadores;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label7;
     }
 }
 
