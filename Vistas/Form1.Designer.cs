@@ -44,17 +44,21 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(403, 9);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(283, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 13);
+            this.label1.Size = new System.Drawing.Size(239, 39);
             this.label1.TabIndex = 0;
             this.label1.Text = "BIENVENIDO";
             // 
@@ -149,9 +153,19 @@
             // numericUpDown3
             // 
             this.numericUpDown3.Location = new System.Drawing.Point(220, 117);
+            this.numericUpDown3.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(96, 20);
             this.numericUpDown3.TabIndex = 12;
+            this.numericUpDown3.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // button1
             // 
@@ -188,9 +202,11 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.progressBar1);
+            this.panel2.Controls.Add(this.label8);
             this.panel2.Location = new System.Drawing.Point(20, 318);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(834, 256);
+            this.panel2.Size = new System.Drawing.Size(860, 256);
             this.panel2.TabIndex = 12;
             // 
             // label7
@@ -203,6 +219,22 @@
             this.label7.TabIndex = 13;
             this.label7.Text = "Tareas";
             this.label7.Click += new System.EventHandler(this.label7_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(22, 31);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(51, 13);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Procesos";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(71, 57);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(168, 23);
+            this.progressBar1.TabIndex = 1;
             // 
             // Form1
             // 
@@ -223,6 +255,8 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -246,6 +280,8 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label label8;
     }
 }
 

@@ -13,8 +13,11 @@ namespace FinalTestProgra3
 {
     public partial class Form1 : Form
     {
+        //Obtener el maximo de procesadores de nuestra computadora
+        public static int maximoProcesos = Environment.ProcessorCount;
 
-        int[] procesadores_disponibles = { 2, 4, 8, 16 };
+        // Seteamos los procesos que 
+        int[] procesadores_disponibles = { 2, 4, 8, maximoProcesos };
         int[] memoria_disponible = { 128, 256, 512, 1024 };
 
         public Form1()
