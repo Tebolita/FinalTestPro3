@@ -62,7 +62,7 @@ namespace FinalTestProgra3
             // Mostrar la memoria disponible en el ComboBox
             memoria.DataSource = memoria_disponible.Select(m => m.ToString()).ToList();
 
-           
+
         }
 
         private void procesadores_SelectedIndexChanged(object sender, EventArgs e)
@@ -135,6 +135,14 @@ namespace FinalTestProgra3
             }
         }
 
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+            
+        }
 
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -42,6 +42,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
@@ -156,7 +157,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(0, 163);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(319, 48);
+            this.button1.Size = new System.Drawing.Size(338, 48);
             this.button1.TabIndex = 9;
             this.button1.Text = "Establecer";
             this.button1.UseVisualStyleBackColor = true;
@@ -184,25 +185,36 @@
             this.dataGridView1.Size = new System.Drawing.Size(501, 228);
             this.dataGridView1.TabIndex = 11;
             // 
+            // panel2
+            // 
+            this.panel2.Location = new System.Drawing.Point(20, 318);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(834, 256);
+            this.panel2.TabIndex = 12;
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(327, 387);
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(23, 305);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(92, 13);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "Prueba de commit";
+            this.label7.Size = new System.Drawing.Size(64, 20);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "Tareas";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(892, 586);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.panel2);
             this.Name = "Form1";
             this.Text = "Configuraciones";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -231,6 +243,7 @@
         private System.Windows.Forms.ComboBox memoria;
         private System.Windows.Forms.ComboBox procesadores;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label7;
     }
 }
