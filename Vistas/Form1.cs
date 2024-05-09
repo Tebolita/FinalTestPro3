@@ -13,11 +13,9 @@ namespace FinalTestProgra3
 {
     public partial class Form1 : Form
     {
-        //Obtener el maximo de procesadores de nuestra computadora
-        public static int maximoProcesos = Environment.ProcessorCount;
-
+        
         // Seteamos los procesos que 
-        int[] procesadores_disponibles = { 2, 4, 8, maximoProcesos };
+        int[] procesadores_disponibles = { 2, 4, 8, 12, 16 };
         int[] memoria_disponible = { 128, 256, 512, 1024 };
 
         public Form1()
@@ -70,9 +68,30 @@ namespace FinalTestProgra3
 
         private void procesadores_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ComboBox comboBox = (ComboBox)sender;
-            comboBox.DataSource = procesadores_disponibles;
+            int cantidadProcesadores = int.Parse(procesadores.SelectedItem.ToString());
+
+            
+
+            // Cambiar color de los labels según la cantidad de procesadores seleccionados
+            for (int i = 1; i <= 16; i++)
+            {
+                Label label = (Label)this.Controls.Find("procesador" + i, true).FirstOrDefault();
+                if (label != null)
+                {
+                    if (i <= cantidadProcesadores)
+                    {
+                        label.BackColor = Color.Yellow;
+                    }
+                    else
+                    {
+                        label.BackColor = SystemColors.Control; // Color predeterminado
+                    }
+                }
+            }
+            procesadores.SelectedItem = cantidadProcesadores.ToString();
         }
+
+
 
         private void memoria_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -144,6 +163,11 @@ namespace FinalTestProgra3
         }
 
         private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void procesador3_Click(object sender, EventArgs e)
         {
 
         }
