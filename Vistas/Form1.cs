@@ -33,17 +33,32 @@ namespace FinalTestProgra3
         {
             openFileDialog1.ShowDialog();
             Console.WriteLine(openFileDialog1.FileName);
-
             StreamReader sr = new StreamReader(openFileDialog1.FileName);
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("Nombre Proceso");
+            dataTable.Columns.Add("Ciclos");
+            dataTable.Columns.Add("Cantidad de Memoria");
+            dataTable.Columns.Add("Ejecutado");
 
             string line = sr.ReadLine();
 
-            while(line != null)
+            while (line != null)
             {
-                Console.WriteLine(line);
-                line = sr.ReadLine();
-            }
+                
 
+                string[] lineSplit = line.Split(','); // Dividir la línea por comas
+
+                // Verificar si hay suficientes elementos en la línea dividida
+                if (lineSplit.Length >= 3)
+                {
+                    // Agregar una nueva fila al DataTable con los valores correspondientes
+                    dataTable.Rows.Add(lineSplit[0], lineSplit[1], lineSplit[2], "No");
+                }
+
+                line = sr.ReadLine(); // Leer la siguiente línea
+
+            }
+            dataGridView2.DataSource = dataTable;
             sr.Close();
         
 

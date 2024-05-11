@@ -43,8 +43,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.label8 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.procesador3 = new System.Windows.Forms.Label();
@@ -63,10 +64,14 @@
             this.procesador4 = new System.Windows.Forms.Label();
             this.procesador2 = new System.Windows.Forms.Label();
             this.procesador1 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -220,38 +225,48 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.progressBar1);
-            this.panel2.Controls.Add(this.label8);
+            this.panel2.Controls.Add(this.panel4);
+            this.panel2.Controls.Add(this.panel3);
             this.panel2.Location = new System.Drawing.Point(19, 343);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(860, 256);
+            this.panel2.Size = new System.Drawing.Size(992, 256);
             this.panel2.TabIndex = 12;
             // 
-            // progressBar1
+            // panel4
             // 
-            this.progressBar1.Location = new System.Drawing.Point(71, 57);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(168, 23);
-            this.progressBar1.TabIndex = 1;
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Location = new System.Drawing.Point(0, -1);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(437, 256);
+            this.panel4.TabIndex = 1;
             // 
-            // label8
+            // panel3
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(22, 31);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(51, 13);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Procesos";
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.dataGridView2);
+            this.panel3.Location = new System.Drawing.Point(443, -1);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(555, 255);
+            this.panel3.TabIndex = 0;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(-1, 13);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(548, 238);
+            this.dataGridView2.TabIndex = 0;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(23, 305);
+            this.label7.Location = new System.Drawing.Point(16, 331);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(64, 20);
+            this.label7.Size = new System.Drawing.Size(189, 20);
             this.label7.TabIndex = 13;
-            this.label7.Text = "Tareas";
+            this.label7.Text = "Procesos en ejecución";
             this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // groupBox1
@@ -277,7 +292,7 @@
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox1.Location = new System.Drawing.Point(903, 52);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(240, 285);
+            this.groupBox1.Size = new System.Drawing.Size(240, 276);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Procesadores Activos";
@@ -442,12 +457,33 @@
             this.procesador1.TabIndex = 0;
             this.procesador1.Text = "Procesador 1";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(463, 331);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(151, 20);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "Lista de procesos";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(620, 328);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(118, 23);
+            this.button3.TabIndex = 16;
+            this.button3.Text = "Ejecutar procesos";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1155, 621);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.dataGridView1);
@@ -463,7 +499,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -489,8 +526,6 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label procesador1;
         private System.Windows.Forms.Label procesador16;
@@ -508,6 +543,11 @@
         private System.Windows.Forms.Label procesador4;
         private System.Windows.Forms.Label procesador2;
         private System.Windows.Forms.Label procesador3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.DataGridView dataGridView2;
     }
 }
 
