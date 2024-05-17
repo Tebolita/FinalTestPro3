@@ -46,7 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Utility\Lista.cs" />
+    <Compile Include="Utility\ListaCircular.cs" />
+    <Compile Include="Utility\Nodo.cs" />
     <Compile Include="Vistas\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
