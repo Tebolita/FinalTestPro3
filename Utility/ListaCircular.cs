@@ -10,16 +10,26 @@ namespace FinalTestProgra3.Utility
     {
         private Nodo cabeza;
         private Nodo cola;
+        private int capacidadMaxima;
+        private int contador;
 
-        public ListaCircular()
+        public ListaCircular(int capacidad)
         {
             cabeza = null;
             cola = null;
+            capacidadMaxima = capacidad;
+            contador = 0;
         }
 
         // Método para añadir un nuevo nodo al final de la lista
-        public void Añadir(int valor)
+        public void Añadir(string valor)
         {
+            if (contador >= capacidadMaxima)
+            {
+                Console.WriteLine("La lista ha alcanzado su capacidad máxima. No se puede añadir el nuevo nodo.");
+                return;
+            }
+
             Nodo nuevoNodo = new Nodo(valor);
 
             if (cabeza == null)
@@ -34,6 +44,8 @@ namespace FinalTestProgra3.Utility
                 cola = nuevoNodo;
                 cola.Siguiente = cabeza; // Mantener la circularidad
             }
+
+            contador++;
         }
 
         // Método para imprimir los valores de la lista circular
@@ -54,8 +66,19 @@ namespace FinalTestProgra3.Utility
             Console.WriteLine();
         }
 
+        public bool HayEspacioDisponible()
+        {
+            return contador < capacidadMaxima;
+        }
+
+
+        public int retornarContador()
+        {
+            return contador;
+        }
+
         // Método para eliminar un nodo con un valor específico
-        public void Eliminar(int valor)
+        public void Eliminar(string valor)
         {
             if (cabeza == null)
             {
@@ -93,6 +116,7 @@ namespace FinalTestProgra3.Utility
                         }
                     }
 
+                    contador--;
                     Console.WriteLine($"Nodo con valor {valor} eliminado.");
                     return;
                 }
@@ -103,6 +127,30 @@ namespace FinalTestProgra3.Utility
 
             Console.WriteLine($"Nodo con valor {valor} no encontrado.");
         }
+
+        // Método para imprimir un nodo específico
+        public string ImprimirNodo(string valor)
+        {
+            if (cabeza == null)
+            {
+                Console.WriteLine("La lista está vacía.");
+                return "";
+            }
+
+            Nodo actual = cabeza;
+            do
+            {
+                if (actual.Valor == valor)
+                {
+                    return actual.Valor;
+                }
+                actual = actual.Siguiente;
+            } while (actual != cabeza);
+
+            return "";
+        }
+
+
     }
 
 }

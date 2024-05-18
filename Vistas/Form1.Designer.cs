@@ -44,14 +44,14 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.progressBar8 = new System.Windows.Forms.ProgressBar();
-            this.progressBar7 = new System.Windows.Forms.ProgressBar();
-            this.progressBar6 = new System.Windows.Forms.ProgressBar();
-            this.progressBar5 = new System.Windows.Forms.ProgressBar();
-            this.progressBar4 = new System.Windows.Forms.ProgressBar();
-            this.progressBar3 = new System.Windows.Forms.ProgressBar();
-            this.progressBar2 = new System.Windows.Forms.ProgressBar();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.label7 = new System.Windows.Forms.Label();
@@ -74,14 +74,6 @@
             this.procesador1 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -251,105 +243,120 @@
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Location = new System.Drawing.Point(19, 343);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1157, 341);
+            this.panel2.Size = new System.Drawing.Size(999, 341);
             this.panel2.TabIndex = 12;
             // 
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.progressBar8);
             this.panel4.Controls.Add(this.label16);
-            this.panel4.Controls.Add(this.progressBar7);
             this.panel4.Controls.Add(this.label15);
-            this.panel4.Controls.Add(this.progressBar6);
             this.panel4.Controls.Add(this.label14);
-            this.panel4.Controls.Add(this.progressBar5);
             this.panel4.Controls.Add(this.label13);
-            this.panel4.Controls.Add(this.progressBar4);
             this.panel4.Controls.Add(this.label12);
-            this.panel4.Controls.Add(this.progressBar3);
             this.panel4.Controls.Add(this.label11);
-            this.panel4.Controls.Add(this.progressBar2);
             this.panel4.Controls.Add(this.label10);
-            this.panel4.Controls.Add(this.progressBar1);
             this.panel4.Controls.Add(this.label9);
             this.panel4.Location = new System.Drawing.Point(0, -1);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(437, 337);
+            this.panel4.Size = new System.Drawing.Size(285, 337);
             this.panel4.TabIndex = 1;
             // 
-            // progressBar8
+            // label16
             // 
-            this.progressBar8.Location = new System.Drawing.Point(152, 226);
-            this.progressBar8.Name = "progressBar8";
-            this.progressBar8.Size = new System.Drawing.Size(279, 23);
-            this.progressBar8.TabIndex = 15;
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(3, 226);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(55, 13);
+            this.label16.TabIndex = 14;
+            this.label16.Text = "Proceso 8";
+            this.label16.Click += new System.EventHandler(this.label16_Click);
             // 
-            // progressBar7
+            // label15
             // 
-            this.progressBar7.Location = new System.Drawing.Point(152, 197);
-            this.progressBar7.Name = "progressBar7";
-            this.progressBar7.Size = new System.Drawing.Size(279, 23);
-            this.progressBar7.TabIndex = 13;
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(3, 197);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(55, 13);
+            this.label15.TabIndex = 12;
+            this.label15.Text = "Proceso 7";
+            this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
-            // progressBar6
+            // label14
             // 
-            this.progressBar6.Location = new System.Drawing.Point(152, 168);
-            this.progressBar6.Name = "progressBar6";
-            this.progressBar6.Size = new System.Drawing.Size(279, 23);
-            this.progressBar6.TabIndex = 11;
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(3, 168);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(55, 13);
+            this.label14.TabIndex = 10;
+            this.label14.Text = "Proceso 6";
+            this.label14.Click += new System.EventHandler(this.label14_Click);
             // 
-            // progressBar5
+            // label13
             // 
-            this.progressBar5.Location = new System.Drawing.Point(152, 139);
-            this.progressBar5.Name = "progressBar5";
-            this.progressBar5.Size = new System.Drawing.Size(279, 23);
-            this.progressBar5.TabIndex = 9;
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(3, 139);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(55, 13);
+            this.label13.TabIndex = 8;
+            this.label13.Text = "Proceso 5";
+            this.label13.Click += new System.EventHandler(this.label13_Click);
             // 
-            // progressBar4
+            // label12
             // 
-            this.progressBar4.Location = new System.Drawing.Point(152, 110);
-            this.progressBar4.Name = "progressBar4";
-            this.progressBar4.Size = new System.Drawing.Size(279, 23);
-            this.progressBar4.TabIndex = 7;
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(3, 110);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(55, 13);
+            this.label12.TabIndex = 6;
+            this.label12.Text = "Proceso 4";
+            this.label12.Click += new System.EventHandler(this.label12_Click);
             // 
-            // progressBar3
+            // label11
             // 
-            this.progressBar3.Location = new System.Drawing.Point(152, 78);
-            this.progressBar3.Name = "progressBar3";
-            this.progressBar3.Size = new System.Drawing.Size(279, 23);
-            this.progressBar3.TabIndex = 5;
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 78);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(55, 13);
+            this.label11.TabIndex = 4;
+            this.label11.Text = "Proceso 3";
+            this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
-            // progressBar2
+            // label10
             // 
-            this.progressBar2.Location = new System.Drawing.Point(152, 45);
-            this.progressBar2.Name = "progressBar2";
-            this.progressBar2.Size = new System.Drawing.Size(279, 23);
-            this.progressBar2.TabIndex = 3;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(3, 45);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(55, 13);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "Proceso 2";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
-            // progressBar1
+            // label9
             // 
-            this.progressBar1.Location = new System.Drawing.Point(151, 11);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(280, 23);
-            this.progressBar1.TabIndex = 1;
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(3, 11);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(55, 13);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "Proceso 1";
             // 
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.dataGridView2);
-            this.panel3.Location = new System.Drawing.Point(443, -1);
+            this.panel3.Location = new System.Drawing.Point(291, -1);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(713, 255);
+            this.panel3.Size = new System.Drawing.Size(707, 255);
             this.panel3.TabIndex = 0;
             // 
             // dataGridView2
             // 
             this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(3, 10);
+            this.dataGridView2.Location = new System.Drawing.Point(7, 10);
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(705, 238);
+            this.dataGridView2.Size = new System.Drawing.Size(701, 238);
             this.dataGridView2.TabIndex = 0;
             // 
             // label7
@@ -555,7 +562,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(463, 331);
+            this.label8.Location = new System.Drawing.Point(315, 331);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(151, 20);
             this.label8.TabIndex = 15;
@@ -563,92 +570,13 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(620, 328);
+            this.button3.Location = new System.Drawing.Point(472, 328);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(118, 23);
             this.button3.TabIndex = 16;
             this.button3.Text = "Ejecutar procesos";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 11);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(55, 13);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "Proceso 1";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(3, 45);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(55, 13);
-            this.label10.TabIndex = 2;
-            this.label10.Text = "Proceso 2";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(3, 78);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(55, 13);
-            this.label11.TabIndex = 4;
-            this.label11.Text = "Proceso 3";
-            this.label11.Click += new System.EventHandler(this.label11_Click);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(3, 110);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(55, 13);
-            this.label12.TabIndex = 6;
-            this.label12.Text = "Proceso 4";
-            this.label12.Click += new System.EventHandler(this.label12_Click);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(3, 139);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(55, 13);
-            this.label13.TabIndex = 8;
-            this.label13.Text = "Proceso 5";
-            this.label13.Click += new System.EventHandler(this.label13_Click);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(3, 168);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(55, 13);
-            this.label14.TabIndex = 10;
-            this.label14.Text = "Proceso 6";
-            this.label14.Click += new System.EventHandler(this.label14_Click);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(3, 197);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(55, 13);
-            this.label15.TabIndex = 12;
-            this.label15.Text = "Proceso 7";
-            this.label15.Click += new System.EventHandler(this.label15_Click);
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(3, 226);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(55, 13);
-            this.label16.TabIndex = 14;
-            this.label16.Text = "Proceso 7";
-            this.label16.Click += new System.EventHandler(this.label16_Click);
             // 
             // Form1
             // 
@@ -724,14 +652,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.ProgressBar progressBar3;
-        private System.Windows.Forms.ProgressBar progressBar2;
-        private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.ProgressBar progressBar7;
-        private System.Windows.Forms.ProgressBar progressBar6;
-        private System.Windows.Forms.ProgressBar progressBar5;
-        private System.Windows.Forms.ProgressBar progressBar4;
-        private System.Windows.Forms.ProgressBar progressBar8;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;

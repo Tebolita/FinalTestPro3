@@ -8,10 +8,10 @@ namespace FinalTestProgra3.Utility
 {
     public class Nodo
     {
-        public int Valor { get; set; }
+        public string Valor { get; set; }
         public Nodo Siguiente { get; set; }
 
-        public Nodo(int valor)
+        public Nodo(string valor)
         {
             Valor = valor;
             Siguiente = null;

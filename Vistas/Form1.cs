@@ -8,12 +8,15 @@ using FinalTestProgra3.Utility;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
+using System.Diagnostics;
+using System.Collections;
 
 namespace FinalTestProgra3
 {
     public partial class Form1 : Form
     {
-        
+
         // Seteamos los procesos que 
         int[] procesadores_disponibles = { 2, 4, 8, 12, 16 };
         int[] memoria_disponible = { 128, 256, 512, 1024 };
@@ -23,8 +26,14 @@ namespace FinalTestProgra3
         int configProcesadores = 0;
         int configCiclos = 0;
         int totaldememoria = 0;
+
         List<List<string>> procesosLista = new List<List<string>>();
-        ListaCircular lista = new ListaCircular();
+        List<List<string>> listaPrioridad = new List<List<string>>();
+
+        List<List<string>> listaTerminada = new List<List<string>>();
+        List<List<string>> listaPendiente = new List<List<string>>();
+
+        ListaCircular listaCola;
 
         // Para los colores de las celdas
         private void CambiarColorCelda(int fila, int columna, Color color)
@@ -40,7 +49,7 @@ namespace FinalTestProgra3
 
 
         // Para los colores de las celdas
-        private bool PintarCeldas(int totaldememoria) 
+        private bool PintarCeldas(int totaldememoria)
         {
             for (int i = 0; i < totaldememoria; i++)
             {
@@ -53,7 +62,7 @@ namespace FinalTestProgra3
                     MessageBox.Show("No hay suficientes celdas para pintar.");
                     return false;
                 }
-   
+
                 CambiarColorCelda(fila, columna, Color.Red);
 
             }
@@ -65,16 +74,12 @@ namespace FinalTestProgra3
         {
             configMemoria = int.Parse(memoria.Text);
             configCiclos = int.Parse(numericUpDown3.Text);
-            
-            for (int i = 0; i < int.Parse(procesadores.Text); i++)
-            {
-                lista.Añadir(i);
-            }
-
-            for (int i = 0; i < procesosLista.Count; i++)
-            {
-                SetearNombres(procesosLista[i][0] + " -->" , int.Parse(procesosLista[i][1]));
-            }
+            listaCola = new ListaCircular(int.Parse(procesadores.Text));
+            totaldememoria = int.Parse(memoria.Text);
+            //for (int i = 0; i < procesosLista.Count; i++)
+            //{
+            //    SetearNombres(procesosLista[i][0] + " -->" , int.Parse(procesosLista[i][1]));
+            //}
 
 
         }
@@ -82,7 +87,7 @@ namespace FinalTestProgra3
         public Form1()
         {
             InitializeComponent();
-            
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -108,7 +113,7 @@ namespace FinalTestProgra3
                 while (line != null)
                 {
                     // Dividir la línea por comas
-                    List<string> listaTemporal = new List<string> (line.Split(','));
+                    List<string> listaTemporal = new List<string>(line.Split(','));
 
 
                     // Verificar si hay suficientes elementos en la línea dividida
@@ -116,10 +121,9 @@ namespace FinalTestProgra3
                     {
                         // Agregar una nueva fila al DataTable con los valores correspondientes
                         dataTable.Rows.Add(listaTemporal[0], listaTemporal[1], listaTemporal[2], "No");
-
                         //Llenar la lista
                         procesosLista.Add(listaTemporal);
-                        totaldememoria += int.Parse(listaTemporal[2]);
+                        //totaldememoria += int.Parse(listaTemporal[2]);
                     }
 
                     line = sr.ReadLine(); // Leer la siguiente línea
@@ -128,15 +132,15 @@ namespace FinalTestProgra3
                 dataGridView2.DataSource = dataTable;
                 sr.Close();
 
-                for (int i = 0; i <= totaldememoria; i++)
-                {
-                    if (PintarCeldas(i))
-                    {
-                        continue;
-                    }else break;
-                    
-                }
-                
+                //for (int i = 0; i <= totaldememoria; i++)
+                //{
+                //    if (PintarCeldas(i))
+                //    {
+                //        continue;
+                //    }else break;
+
+                //}
+
             }
             catch (Exception)
             {
@@ -253,7 +257,7 @@ namespace FinalTestProgra3
 
         private void progressBar1_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void label7_Click(object sender, EventArgs e)
@@ -266,52 +270,278 @@ namespace FinalTestProgra3
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
+
+        private void AsignarProcesos()
         {
 
+            for (int i = 0; i < procesosLista.Count; i++)
+            {
+                if (listaCola.HayEspacioDisponible())
+                {
+                    if (listaPrioridad.Count > 0)
+                    {
+                        for (int j = 0; j < listaPrioridad.Count; j++)
+                        {
+                            if (int.Parse(listaPrioridad[j][2]) < totaldememoria)
+                            {
+                                listaCola.Añadir(listaPrioridad[j][0].ToString());
+                                SetearNombres(listaPrioridad[j][0] + " -->", int.Parse(listaPrioridad[j][2]));
+                                totaldememoria -= int.Parse(listaPrioridad[j][2]);
+                                listaPrioridad.Remove(listaPrioridad[j]);
+                                dataGridView2.Rows[j].Cells[3].Value = "Si";
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (int.Parse(procesosLista[i][2]) < totaldememoria)
+                        {
+                            listaCola.Añadir(procesosLista[i][0].ToString());
+                            SetearNombres(procesosLista[i][0] + " -->", int.Parse(procesosLista[i][2]));
+                            totaldememoria -= int.Parse(procesosLista[i][2]);
+                            dataGridView2.Rows[i].Cells[3].Value = "Si";
+                        }
+                        else
+                        {
+                            listaPrioridad.Add(procesosLista[i]);
+                        }
+                    }
+                }
+                else
+                {
+                    listaPrioridad.Add(procesosLista[i]);
+                }
+            }
         }
+
+        private async void button3_Click(object sender, EventArgs e)
+        {
+            AsignarProcesos();
+
+                if (label9.Text != "Proceso 1")
+                {
+                    TareasProcesosAsync(label9.Text, 1);
+                }
+                if (label10.Text != "Proceso 2")
+                {
+                    TareasProcesosAsync(label10.Text, 2);
+                }
+                if (label11.Text != "Proceso 3")
+                {
+                    TareasProcesosAsync(label11.Text, 3);
+                }
+                if (label12.Text != "Proceso 4")
+                {
+                    TareasProcesosAsync(label12.Text, 4);
+                }
+                if (label13.Text != "Proceso 5")
+                {
+                    TareasProcesosAsync(label13.Text, 5);
+                }
+                if (label14.Text != "Proceso 6")
+                {
+                    TareasProcesosAsync(label14.Text, 6);
+                }
+                if (label15.Text != "Proceso 7")
+                {
+                    TareasProcesosAsync(label15.Text, 7);
+                }
+                if (label16.Text != "Proceso 8")
+                {
+                    TareasProcesosAsync(label16.Text, 8);
+                }
+                configCiclos -= 1;
+            
+            Console.WriteLine("Todo bien");
+
+            for (int i = 0; i < listaPrioridad.Count; i++)
+            {
+                listaPendiente.Add(listaPrioridad[i]);
+            }
+
+            for (int i = 0; i < procesosLista.Count; i++)
+            {
+                listaPendiente.Add(procesosLista[i]);
+            }
+
+
+            for (int i = 0; i < listaTerminada.Count; i++)
+            {
+                Console.WriteLine(listaTerminada[i][0]);
+                Console.WriteLine(listaTerminada[i][1]);
+                Console.WriteLine(listaTerminada[i][2]);
+            }
+
+            for (int i = 0; i < listaPendiente.Count; i++)
+            {
+                Console.WriteLine(listaPendiente[i][0]);
+                Console.WriteLine(listaPendiente[i][1]);
+                Console.WriteLine(listaPendiente[i][2]);
+            }
+        }
+        private void TareasProcesosAsync(string comparar, int proceso)
+        {
+            comparar = comparar.Replace("-->", "").Trim();
+            int totalciclo = 0;
+            for (int j = 0; j < configCiclos; j++)
+            {
+                for (int l = 0; l < listaPrioridad.Count; l++)
+                {
+                    if (listaCola.ImprimirNodo(comparar) == comparar)
+                    {
+                        for (int i = 0; i < listaPrioridad.Count; i++)
+                        {
+                            if (listaPrioridad[i].Contains(comparar))
+                            {
+                                if (int.Parse(listaPrioridad[i][1]) == totalciclo)
+                                {
+                                    switch (proceso)
+                                    {
+                                        case 1:
+                                            label9.Text = "Proceso 1";
+                                            break;
+                                        case 2:
+                                            label10.Text = "Proceso 2";
+                                            break;
+                                        case 3:
+                                            label11.Text = "Proceso 3";
+                                            break;
+                                        case 4:
+                                            label12.Text = "Proceso 4";
+                                            break;
+                                        case 5:
+                                            label13.Text = "Proceso 5";
+                                            break;
+                                        case 6:
+                                            label14.Text = "Proceso 6";
+                                            break;
+                                        case 7:
+                                            label15.Text = "Proceso 7";
+                                            break;
+                                        case 8:
+                                            label16.Text = "Proceso 8";
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    totaldememoria += int.Parse(listaPrioridad[i][2]);
+                                    listaTerminada.Add(listaPrioridad[i]);
+                                    listaPrioridad.Remove(listaPrioridad[i]);
+                                    listaCola.Eliminar(comparar);
+                                
+                                    break;
+                                }
+                                else
+                                {
+                                    totalciclo += 1;
+                                }
+
+                            }
+                        }
+                    }
+                }
+
+                for (int ciclos = 0; ciclos < listaCola.retornarContador(); ciclos++)
+                {
+                    if (listaCola.ImprimirNodo(comparar) == comparar)
+                    {
+                        for (int i = 0; i < procesosLista.Count; i++)
+                        {
+                            if (procesosLista[i].Contains(comparar))
+                            {
+                                if (int.Parse(procesosLista[i][2]) == totalciclo)
+                                {
+                                    switch (proceso)
+                                    {
+                                        case 1:
+                                            label9.Text = "Proceso 1";
+                                            break;
+                                        case 2:
+                                            label10.Text = "Proceso 2";
+                                            break;
+                                        case 3:
+                                            label11.Text = "Proceso 3";
+                                            break;
+                                        case 4:
+                                            label12.Text = "Proceso 4";
+                                            break;
+                                        case 5:
+                                            label13.Text = "Proceso 5";
+                                            break;
+                                        case 6:
+                                            label14.Text = "Proceso 6";
+                                            break;
+                                        case 7:
+                                            label15.Text = "Proceso 7";
+                                            break;
+                                        case 8:
+                                            label16.Text = "Proceso 8";
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    totaldememoria += int.Parse(procesosLista[i][2]);
+                                    listaTerminada.Add(procesosLista[i]);
+                                    procesosLista.Remove(procesosLista[i]);
+                                    listaCola.Eliminar(comparar);
+                                    break;
+                                }
+                                else
+                                {
+                                    totalciclo += 1;
+                                }
+
+                            }
+                        }
+                    }
+                }
+                   
+            }
+        }
+
+
 
         private void SetearNombres(string nombre, int maximoValorPro)
         {
             if (label9.Text == "Proceso 1")
             {
                 label9.Text = nombre;
-                progressBar1.Maximum = maximoValorPro;
+               
             }
             else if (label10.Text == "Proceso 2")
             {
                 label10.Text = nombre;
-                progressBar2.Maximum = maximoValorPro;
+                
             }
             else if (label11.Text == "Proceso 3")
             {
                 label11.Text = nombre;
-                progressBar3.Maximum = maximoValorPro;
+                
             }
             else if (label12.Text == "Proceso 4")
             {
                 label12.Text = nombre;
-                progressBar4.Maximum = maximoValorPro;
+                
             }
             else if (label13.Text == "Proceso 5")
             {
                 label13.Text = nombre;
-                progressBar5.Maximum = maximoValorPro;
+               
             }
             else if (label14.Text == "Proceso 6")
             {
                 label14.Text = nombre;
-                progressBar6.Maximum = maximoValorPro;
+               
             }
             else if (label15.Text == "Proceso 7")
             {
                 label15.Text = nombre;
-                progressBar7.Maximum = maximoValorPro;
+                
             }
             else if (label16.Text == "Proceso 8")
             {
                 label16.Text = nombre;
-                progressBar8.Maximum = maximoValorPro;
+                
             }
 
         }
