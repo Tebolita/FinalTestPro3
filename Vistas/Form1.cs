@@ -30,8 +30,18 @@ namespace FinalTestProgra3
         List<List<string>> procesosLista = new List<List<string>>();
         List<List<string>> listaPrioridad = new List<List<string>>();
 
+        List<List<string>> procesosAEjecutar = new List<List<string>>();
+        List<List<string>> procesoPrioridadAEjecutar = new List<List<string>>();
+
+
         List<List<string>> listaTerminada = new List<List<string>>();
         List<List<string>> listaPendiente = new List<List<string>>();
+
+        List<List<string>> listaNuncaEjecutar = new List<List<string>>();
+
+        List<int> contarProcesos = new List<int>();
+
+       
 
         ListaCircular listaCola;
 
@@ -76,6 +86,11 @@ namespace FinalTestProgra3
             configCiclos = int.Parse(numericUpDown3.Text);
             listaCola = new ListaCircular(int.Parse(procesadores.Text));
             totaldememoria = int.Parse(memoria.Text);
+            for (int i = 0; i < 16; i++)
+            {
+                contarProcesos.Add(0);
+            }
+            
             //for (int i = 0; i < procesosLista.Count; i++)
             //{
             //    SetearNombres(procesosLista[i][0] + " -->" , int.Parse(procesosLista[i][1]));
@@ -271,16 +286,76 @@ namespace FinalTestProgra3
         }
 
 
-        private void AsignarProcesos()
+        private void AsignarProcesos(int primeraVuelta)
         {
 
-            for (int i = 0; i < procesosLista.Count; i++)
+            if (primeraVuelta == 0)
             {
-                if (listaCola.HayEspacioDisponible())
+                //Descartar procesos que tengan una memoria mucho mayor a la establecida
+                for (int i = 0; i < procesosLista.Count; i++)
                 {
-                    if (listaPrioridad.Count > 0)
+                    if (listaCola.HayEspacioDisponible())
                     {
-                        for (int j = 0; j < listaPrioridad.Count; j++)
+                        if (int.Parse(procesosLista[i][2]) > totaldememoria)
+                        {
+                            listaNuncaEjecutar.Add(procesosLista[i]);
+                            procesosLista.Remove(procesosLista[i]);
+                            i = 0;
+                        }
+                    }
+                }
+
+
+                for (int i = 0; i < procesosLista.Count; i++)
+                {
+                    if (listaCola.HayEspacioDisponible())
+                    {
+                        if (listaPrioridad.Count > 0)
+                        {
+                            for (int j = 0; j < listaPrioridad.Count; j++)
+                            {
+                                if (int.Parse(listaPrioridad[j][2]) < totaldememoria)
+                                {
+                                    listaCola.Añadir(listaPrioridad[j][0].ToString());
+                                    SetearNombres(listaPrioridad[j][0] + " -->", int.Parse(listaPrioridad[j][2]));
+                                    totaldememoria -= int.Parse(listaPrioridad[j][2]);
+                                    listaPrioridad.Remove(listaPrioridad[j]);
+                                    dataGridView2.Rows[j].Cells[3].Value = "Si";
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (int.Parse(procesosLista[i][2]) < totaldememoria)
+                            {
+                                listaCola.Añadir(procesosLista[i][0].ToString());
+                                SetearNombres(procesosLista[i][0] + " -->", int.Parse(procesosLista[i][2]));
+                                totaldememoria -= int.Parse(procesosLista[i][2]);
+                                dataGridView2.Rows[i].Cells[3].Value = "Si";
+                                procesosAEjecutar.Add(procesosLista[i]);
+                            }
+                            else
+                            {
+                                listaPrioridad.Add(procesosLista[i]);
+                                procesoPrioridadAEjecutar.Add(procesosLista[i]);
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        listaPrioridad.Add(procesosLista[i]);
+                        procesoPrioridadAEjecutar.Add(procesosLista[i]);
+                    }
+                }
+            }
+            else if (primeraVuelta == 1)
+            {
+                if (listaPrioridad.Count > 0)
+                {
+                    for (int j = 0; j < listaPrioridad.Count; j++)
+                    {
+                        if (listaCola.HayEspacioDisponible())
                         {
                             if (int.Parse(listaPrioridad[j][2]) < totaldememoria)
                             {
@@ -292,210 +367,146 @@ namespace FinalTestProgra3
                             }
                         }
                     }
-                    else
-                    {
-                        if (int.Parse(procesosLista[i][2]) < totaldememoria)
-                        {
-                            listaCola.Añadir(procesosLista[i][0].ToString());
-                            SetearNombres(procesosLista[i][0] + " -->", int.Parse(procesosLista[i][2]));
-                            totaldememoria -= int.Parse(procesosLista[i][2]);
-                            dataGridView2.Rows[i].Cells[3].Value = "Si";
-                        }
-                        else
-                        {
-                            listaPrioridad.Add(procesosLista[i]);
-                        }
-                    }
-                }
-                else
-                {
-                    listaPrioridad.Add(procesosLista[i]);
                 }
             }
+
         }
 
         private async void button3_Click(object sender, EventArgs e)
         {
-            AsignarProcesos();
+            AsignarProcesos(0);
+            TareasProcesosAsync();
 
-                if (label9.Text != "Proceso 1")
-                {
-                    TareasProcesosAsync(label9.Text, 1);
-                }
-                if (label10.Text != "Proceso 2")
-                {
-                    TareasProcesosAsync(label10.Text, 2);
-                }
-                if (label11.Text != "Proceso 3")
-                {
-                    TareasProcesosAsync(label11.Text, 3);
-                }
-                if (label12.Text != "Proceso 4")
-                {
-                    TareasProcesosAsync(label12.Text, 4);
-                }
-                if (label13.Text != "Proceso 5")
-                {
-                    TareasProcesosAsync(label13.Text, 5);
-                }
-                if (label14.Text != "Proceso 6")
-                {
-                    TareasProcesosAsync(label14.Text, 6);
-                }
-                if (label15.Text != "Proceso 7")
-                {
-                    TareasProcesosAsync(label15.Text, 7);
-                }
-                if (label16.Text != "Proceso 8")
-                {
-                    TareasProcesosAsync(label16.Text, 8);
-                }
-                configCiclos -= 1;
-            
-            Console.WriteLine("Todo bien");
+            DataTable dataTableTerminado = new DataTable();
+            dataTableTerminado.Columns.Add("Nombre Proceso");
+            dataTableTerminado.Columns.Add("Ciclos");
+            dataTableTerminado.Columns.Add("Cantidad de Memoria");
 
-            for (int i = 0; i < listaPrioridad.Count; i++)
-            {
-                listaPendiente.Add(listaPrioridad[i]);
-            }
+            DataTable dataTablePendiente = new DataTable();
+            dataTablePendiente.Columns.Add("Nombre Proceso");
+            dataTablePendiente.Columns.Add("Ciclos");
+            dataTablePendiente.Columns.Add("Cantidad de Memoria");
 
-            for (int i = 0; i < procesosLista.Count; i++)
-            {
-                listaPendiente.Add(procesosLista[i]);
-            }
+            DataTable dataTableNoEjecutados = new DataTable();
+            dataTableNoEjecutados.Columns.Add("Nombre Proceso");
+            dataTableNoEjecutados.Columns.Add("Ciclos");
+            dataTableNoEjecutados.Columns.Add("Cantidad de Memoria");
 
-
+            Console.WriteLine("Terminadas: ");
             for (int i = 0; i < listaTerminada.Count; i++)
             {
-                Console.WriteLine(listaTerminada[i][0]);
-                Console.WriteLine(listaTerminada[i][1]);
-                Console.WriteLine(listaTerminada[i][2]);
+                dataTableTerminado.Rows.Add(listaTerminada[i][0], listaTerminada[i][1], listaTerminada[i][2]);
             }
 
+            Console.WriteLine("Pendientes: ");
             for (int i = 0; i < listaPendiente.Count; i++)
             {
-                Console.WriteLine(listaPendiente[i][0]);
-                Console.WriteLine(listaPendiente[i][1]);
-                Console.WriteLine(listaPendiente[i][2]);
+                dataTablePendiente.Rows.Add(listaPendiente[i][0], listaPendiente[i][1], listaPendiente[i][2]);
             }
-        }
-        private void TareasProcesosAsync(string comparar, int proceso)
-        {
-            comparar = comparar.Replace("-->", "").Trim();
-            int totalciclo = 0;
-            for (int j = 0; j < configCiclos; j++)
+
+            for (int i = 0; i < listaNuncaEjecutar.Count; i++)
             {
-                for (int l = 0; l < listaPrioridad.Count; l++)
-                {
-                    if (listaCola.ImprimirNodo(comparar) == comparar)
-                    {
-                        for (int i = 0; i < listaPrioridad.Count; i++)
-                        {
-                            if (listaPrioridad[i].Contains(comparar))
-                            {
-                                if (int.Parse(listaPrioridad[i][1]) == totalciclo)
-                                {
-                                    switch (proceso)
-                                    {
-                                        case 1:
-                                            label9.Text = "Proceso 1";
-                                            break;
-                                        case 2:
-                                            label10.Text = "Proceso 2";
-                                            break;
-                                        case 3:
-                                            label11.Text = "Proceso 3";
-                                            break;
-                                        case 4:
-                                            label12.Text = "Proceso 4";
-                                            break;
-                                        case 5:
-                                            label13.Text = "Proceso 5";
-                                            break;
-                                        case 6:
-                                            label14.Text = "Proceso 6";
-                                            break;
-                                        case 7:
-                                            label15.Text = "Proceso 7";
-                                            break;
-                                        case 8:
-                                            label16.Text = "Proceso 8";
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                    totaldememoria += int.Parse(listaPrioridad[i][2]);
-                                    listaTerminada.Add(listaPrioridad[i]);
-                                    listaPrioridad.Remove(listaPrioridad[i]);
-                                    listaCola.Eliminar(comparar);
-                                
-                                    break;
-                                }
-                                else
-                                {
-                                    totalciclo += 1;
-                                }
+                dataTableNoEjecutados.Rows.Add(listaNuncaEjecutar[i][0], listaNuncaEjecutar[i][1], listaNuncaEjecutar[i][2]);
+            }
 
-                            }
+            dataGridView4.DataSource = dataTableTerminado;
+            dataGridView5.DataSource = dataTablePendiente;
+            dataGridView3.DataSource = dataTableNoEjecutados;
+        }
+        private void TareasProcesosAsync()
+        {
+            //comparar = comparar.Replace("-->", "").Trim();
+            for (int j = configCiclos; 0 < j; j--)
+            {
+
+                for (int i = 0; i < procesosAEjecutar.Count; i++)
+                {
+                    if (listaCola.ImprimirNodo(procesosAEjecutar[i][0]).Contains(procesosAEjecutar[i][0]))
+                    {
+                        if (int.Parse(procesosLista[i][1]) == contarProcesos[i])
+                        {
+                            totaldememoria += int.Parse(procesosAEjecutar[i][2]);
+                            listaTerminada.Add(procesosAEjecutar[i]);
+                            listaCola.Eliminar(procesosAEjecutar[i][0]);
+                            //procesosAEjecutar.Remove(procesosAEjecutar[i]);
+                            AsignarProcesos(1);
+                            contarProcesos[i] = 0;
+                            break;
+                        }
+                        else
+                        {
+                            contarProcesos[i] += 1;
+                            break;
                         }
                     }
                 }
 
-                for (int ciclos = 0; ciclos < listaCola.retornarContador(); ciclos++)
-                {
-                    if (listaCola.ImprimirNodo(comparar) == comparar)
-                    {
-                        for (int i = 0; i < procesosLista.Count; i++)
-                        {
-                            if (procesosLista[i].Contains(comparar))
-                            {
-                                if (int.Parse(procesosLista[i][2]) == totalciclo)
-                                {
-                                    switch (proceso)
-                                    {
-                                        case 1:
-                                            label9.Text = "Proceso 1";
-                                            break;
-                                        case 2:
-                                            label10.Text = "Proceso 2";
-                                            break;
-                                        case 3:
-                                            label11.Text = "Proceso 3";
-                                            break;
-                                        case 4:
-                                            label12.Text = "Proceso 4";
-                                            break;
-                                        case 5:
-                                            label13.Text = "Proceso 5";
-                                            break;
-                                        case 6:
-                                            label14.Text = "Proceso 6";
-                                            break;
-                                        case 7:
-                                            label15.Text = "Proceso 7";
-                                            break;
-                                        case 8:
-                                            label16.Text = "Proceso 8";
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                    totaldememoria += int.Parse(procesosLista[i][2]);
-                                    listaTerminada.Add(procesosLista[i]);
-                                    procesosLista.Remove(procesosLista[i]);
-                                    listaCola.Eliminar(comparar);
-                                    break;
-                                }
-                                else
-                                {
-                                    totalciclo += 1;
-                                }
 
-                            }
+
+                for (int i = 0; i < procesoPrioridadAEjecutar.Count; i++)
+                {
+                    if (listaCola.ImprimirNodo(procesoPrioridadAEjecutar[i][0]).Contains(procesoPrioridadAEjecutar[i][0]))
+                    {
+                        if (int.Parse(procesoPrioridadAEjecutar[i][1]) == contarProcesos[i])
+                        {
+                            totaldememoria += int.Parse(procesoPrioridadAEjecutar[i][2]);
+                            listaTerminada.Add(procesoPrioridadAEjecutar[i]);
+                            listaCola.Eliminar(procesoPrioridadAEjecutar[i][0]);
+                            AsignarProcesos(1);
+                            contarProcesos[i] = 0;
+                            //listaPrioridad.Remove(listaPrioridad[i]);
+                            break;
+                        }
+                        else
+                        {
+                            contarProcesos[i] += 1;
+                            break;
+                        }
+                    }
+                    
+                }
+
+
+                // Bloque para manejar cuando j == 1
+                if (j == 1)
+                {
+                    // Agregar elementos a listaPendiente si cumplen la condición
+                    for (int i = 0; i < procesosLista.Count; i++)
+                    {
+                        if (listaCola.ImprimirNodo(procesosLista[i][0]).Contains(procesosLista[i][0]))
+                        {
+                            procesosLista[i][0] = procesosLista[i][0] + " -> Quedo en el proceso";
+                            listaPendiente.Add(procesosLista[i]);
+                        }
+                    }
+
+                    // Crear un HashSet para almacenar elementos únicos ya presentes en listaPendiente
+                    var itemsAlreadyInList = new HashSet<string>();
+
+                    foreach (var pendiente in listaPendiente)
+                    {
+                        itemsAlreadyInList.Add(pendiente[0]);  // Asume que `pendiente[0]` es único para cada sublista
+                    }
+
+                    // Crear un HashSet para almacenar elementos únicos ya presentes en listaTerminada
+                    var itemsAlreadyInTerminada = new HashSet<string>();
+
+                    foreach (var terminado in listaTerminada)
+                    {
+                        itemsAlreadyInTerminada.Add(terminado[0]);  // Asume que `terminado[0]` es único para cada sublista
+                    }
+
+                    // Verificar y agregar elementos de procesoPrioridadAEjecutar a listaPendiente sin duplicados y no en listaTerminada
+                    foreach (var item in procesoPrioridadAEjecutar)
+                    {
+                        if (!itemsAlreadyInList.Contains(item[0]) && !itemsAlreadyInTerminada.Contains(item[0]))
+                        {
+                            listaPendiente.Add(item);
+                            itemsAlreadyInList.Add(item[0]);
                         }
                     }
                 }
-                   
+
             }
         }
 
