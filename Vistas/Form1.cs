@@ -41,6 +41,7 @@ namespace FinalTestProgra3
 
         List<int> contarProcesos = new List<int>();
 
+        int ciclosfinales = 0;
        
 
         ListaCircular listaCola;
@@ -412,11 +413,14 @@ namespace FinalTestProgra3
             dataGridView4.DataSource = dataTableTerminado;
             dataGridView5.DataSource = dataTablePendiente;
             dataGridView3.DataSource = dataTableNoEjecutados;
+
+            label22.Text = ciclosfinales.ToString();
+            label23.Text = totaldememoria.ToString();
         }
         private void TareasProcesosAsync()
         {
             //comparar = comparar.Replace("-->", "").Trim();
-            for (int j = configCiclos; 0 < j; j--)
+            for (int j = configCiclos; 0 <= j; j--)
             {
 
                 for (int i = 0; i < procesosAEjecutar.Count; i++)
@@ -436,7 +440,6 @@ namespace FinalTestProgra3
                         else
                         {
                             contarProcesos[i] += 1;
-                            break;
                         }
                     }
                 }
@@ -460,7 +463,6 @@ namespace FinalTestProgra3
                         else
                         {
                             contarProcesos[i] += 1;
-                            break;
                         }
                     }
                     
@@ -468,7 +470,7 @@ namespace FinalTestProgra3
 
 
                 // Bloque para manejar cuando j == 1
-                if (j == 1)
+                if (j == 0)
                 {
                     // Agregar elementos a listaPendiente si cumplen la condición
                     for (int i = 0; i < procesosLista.Count; i++)
@@ -506,6 +508,8 @@ namespace FinalTestProgra3
                         }
                     }
                 }
+
+                ciclosfinales = j;
 
             }
         }

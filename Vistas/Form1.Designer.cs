@@ -80,6 +80,10 @@
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.label19 = new System.Windows.Forms.Label();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -638,12 +642,52 @@
             this.dataGridView3.Size = new System.Drawing.Size(283, 150);
             this.dataGridView3.TabIndex = 27;
             // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(1166, 52);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(89, 13);
+            this.label20.TabIndex = 28;
+            this.label20.Text = "Ciclos Restantes:";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(1166, 85);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(96, 13);
+            this.label21.TabIndex = 29;
+            this.label21.Text = "Memoria Restante:";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(1268, 52);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(13, 13);
+            this.label22.TabIndex = 30;
+            this.label22.Text = "0";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(1268, 85);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(13, 13);
+            this.label23.TabIndex = 31;
+            this.label23.Text = "0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1379, 707);
+            this.Controls.Add(this.label23);
+            this.Controls.Add(this.label22);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.label20);
             this.Controls.Add(this.dataGridView3);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.label18);
@@ -735,6 +779,10 @@
         private System.Windows.Forms.DataGridView dataGridView4;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
     }
 }
 
