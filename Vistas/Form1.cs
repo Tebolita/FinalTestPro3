@@ -39,6 +39,8 @@ namespace FinalTestProgra3
 
         List<List<string>> listaNuncaEjecutar = new List<List<string>>();
 
+        List<List<string>> listaNodo = new List<List<string>>();
+
         List<int> contarProcesos = new List<int>();
 
         int ciclosfinales = 0;
@@ -287,12 +289,12 @@ namespace FinalTestProgra3
         }
 
 
-        private void AsignarProcesos(int primeraVuelta)
+        private void AsignarProcesos(bool primeraVuelta, int indexRemplazo)
         {
 
-            if (primeraVuelta == 0)
+            if (primeraVuelta)
             {
-                //Descartar procesos que tengan una memoria mucho mayor a la establecida
+                // Quitar los procesos que ocupen mas memoria de la establecida
                 for (int i = 0; i < procesosLista.Count; i++)
                 {
                     if (listaCola.HayEspacioDisponible())
@@ -304,78 +306,51 @@ namespace FinalTestProgra3
                             i = 0;
                         }
                     }
+
                 }
 
-
-                for (int i = 0; i < procesosLista.Count; i++)
+                while (procesosLista.Count > 0)
                 {
-                    if (listaCola.HayEspacioDisponible())
+                    for (int i = 0; i < procesosLista.Count; i++)
                     {
-                        if (listaPrioridad.Count > 0)
+                        if (int.Parse(procesosLista[i][2]) < totaldememoria && listaCola.HayEspacioDisponible())
                         {
-                            for (int j = 0; j < listaPrioridad.Count; j++)
-                            {
-                                if (int.Parse(listaPrioridad[j][2]) < totaldememoria)
-                                {
-                                    listaCola.Añadir(listaPrioridad[j][0].ToString());
-                                    SetearNombres(listaPrioridad[j][0] + " -->", int.Parse(listaPrioridad[j][2]));
-                                    totaldememoria -= int.Parse(listaPrioridad[j][2]);
-                                    listaPrioridad.Remove(listaPrioridad[j]);
-                                    dataGridView2.Rows[j].Cells[3].Value = "Si";
-                                }
-                            }
+                            listaCola.Añadir(procesosLista[i][0].ToString());
+                            totaldememoria -= int.Parse(procesosLista[i][2]);
+                            listaNodo.Add(procesosLista[i]);
+                            procesosLista.Remove(procesosLista[i]);
+
+                            break;
                         }
                         else
                         {
-                            if (int.Parse(procesosLista[i][2]) < totaldememoria)
-                            {
-                                listaCola.Añadir(procesosLista[i][0].ToString());
-                                SetearNombres(procesosLista[i][0] + " -->", int.Parse(procesosLista[i][2]));
-                                totaldememoria -= int.Parse(procesosLista[i][2]);
-                                dataGridView2.Rows[i].Cells[3].Value = "Si";
-                                procesosAEjecutar.Add(procesosLista[i]);
-                            }
-                            else
-                            {
-                                listaPrioridad.Add(procesosLista[i]);
-                                procesoPrioridadAEjecutar.Add(procesosLista[i]);
-
-                            }
+                            listaPrioridad.Add(procesosLista[i]);
+                            procesosLista.Remove(procesosLista[i]);
+                            break;
                         }
                     }
-                    else
-                    {
-                        listaPrioridad.Add(procesosLista[i]);
-                        procesoPrioridadAEjecutar.Add(procesosLista[i]);
-                    }
+
                 }
             }
-            else if (primeraVuelta == 1)
+            else if (!primeraVuelta)
             {
-                if (listaPrioridad.Count > 0)
+                for (int i = 0; i < listaPrioridad.Count; i++)
                 {
-                    for (int j = 0; j < listaPrioridad.Count; j++)
+                    if (int.Parse(listaPrioridad[i][2]) < totaldememoria && listaCola.HayEspacioDisponible())
                     {
-                        if (listaCola.HayEspacioDisponible())
-                        {
-                            if (int.Parse(listaPrioridad[j][2]) < totaldememoria)
-                            {
-                                listaCola.Añadir(listaPrioridad[j][0].ToString());
-                                SetearNombres(listaPrioridad[j][0] + " -->", int.Parse(listaPrioridad[j][2]));
-                                totaldememoria -= int.Parse(listaPrioridad[j][2]);
-                                listaPrioridad.Remove(listaPrioridad[j]);
-                                dataGridView2.Rows[j].Cells[3].Value = "Si";
-                            }
-                        }
+                        listaCola.Añadir(listaPrioridad[i][0].ToString());
+                        totaldememoria -= int.Parse(listaPrioridad[i][2]);
+                        listaNodo[indexRemplazo] = listaPrioridad[i];
+                        listaPrioridad.Remove(listaPrioridad[i]);
                     }
                 }
-            }
 
+            }
         }
 
         private async void button3_Click(object sender, EventArgs e)
         {
-            AsignarProcesos(0);
+            AsignarProcesos(true, 0);
             TareasProcesosAsync();
 
             DataTable dataTableTerminado = new DataTable();
@@ -423,17 +398,17 @@ namespace FinalTestProgra3
             for (int j = configCiclos; 0 <= j; j--)
             {
 
-                for (int i = 0; i < procesosAEjecutar.Count; i++)
+                for (int i = 0; i < listaNodo.Count; i++)
                 {
-                    if (listaCola.ImprimirNodo(procesosAEjecutar[i][0]).Contains(procesosAEjecutar[i][0]))
+                    if (listaCola.ImprimirNodo(listaNodo[i][0]).Contains(listaNodo[i][0]))
                     {
-                        if (int.Parse(procesosLista[i][1]) == contarProcesos[i])
+                        if (int.Parse(listaNodo[i][1]) == contarProcesos[i])
                         {
-                            totaldememoria += int.Parse(procesosAEjecutar[i][2]);
-                            listaTerminada.Add(procesosAEjecutar[i]);
-                            listaCola.Eliminar(procesosAEjecutar[i][0]);
+                            totaldememoria += int.Parse(listaNodo[i][2]);
+                            listaTerminada.Add(listaNodo[i]);
+                            listaCola.Eliminar(listaNodo[i][0]);
                             //procesosAEjecutar.Remove(procesosAEjecutar[i]);
-                            AsignarProcesos(1);
+                            AsignarProcesos(false, i);
                             contarProcesos[i] = 0;
                             break;
                         }
@@ -444,32 +419,6 @@ namespace FinalTestProgra3
                     }
                 }
 
-
-
-                for (int i = 0; i < procesoPrioridadAEjecutar.Count; i++)
-                {
-                    if (listaCola.ImprimirNodo(procesoPrioridadAEjecutar[i][0]).Contains(procesoPrioridadAEjecutar[i][0]))
-                    {
-                        if (int.Parse(procesoPrioridadAEjecutar[i][1]) == contarProcesos[i])
-                        {
-                            totaldememoria += int.Parse(procesoPrioridadAEjecutar[i][2]);
-                            listaTerminada.Add(procesoPrioridadAEjecutar[i]);
-                            listaCola.Eliminar(procesoPrioridadAEjecutar[i][0]);
-                            AsignarProcesos(1);
-                            contarProcesos[i] = 0;
-                            //listaPrioridad.Remove(listaPrioridad[i]);
-                            break;
-                        }
-                        else
-                        {
-                            contarProcesos[i] += 1;
-                        }
-                    }
-                    
-                }
-
-
-                // Bloque para manejar cuando j == 1
                 if (j == 0)
                 {
                     // Agregar elementos a listaPendiente si cumplen la condición
@@ -510,6 +459,13 @@ namespace FinalTestProgra3
                 }
 
                 ciclosfinales = j;
+
+
+
+                if (listaCola.retornarContador() == 0)
+                {
+                    break;
+                }
 
             }
         }
