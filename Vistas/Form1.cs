@@ -419,15 +419,23 @@ namespace FinalTestProgra3
                     }
                 }
 
-                if (j == 0)
+                if (j == 0 || listaCola.retornarContador() == 0)
                 {
                     // Agregar elementos a listaPendiente si cumplen la condición
-                    for (int i = 0; i < procesosLista.Count; i++)
+                    for (int i = 0; i <= int.Parse(procesadores.Text); i++)
                     {
-                        if (listaCola.ImprimirNodo(procesosLista[i][0]).Contains(procesosLista[i][0]))
+                        if (contarProcesos[i] > 0)
                         {
-                            procesosLista[i][0] = procesosLista[i][0] + " -> Quedo en el proceso";
-                            listaPendiente.Add(procesosLista[i]);
+                            textBox1.Text += Environment.NewLine + listaNodo[i][0] + " -> ocupo procesador " + i + " con " + contarProcesos[i].ToString() + " ciclos";
+
+                            listaNodo[i][0] = listaNodo[i][0] + " -> quedo pendiente en el proceso " + i;
+                            listaPendiente.Add(listaNodo[i]);
+
+                            
+                        }
+                        else if (contarProcesos[i] == 0)
+                        {
+                            textBox1.Text += Environment.NewLine + "Procesador " + i + " Quedo libre";
                         }
                     }
 
@@ -448,7 +456,7 @@ namespace FinalTestProgra3
                     }
 
                     // Verificar y agregar elementos de procesoPrioridadAEjecutar a listaPendiente sin duplicados y no en listaTerminada
-                    foreach (var item in procesoPrioridadAEjecutar)
+                    foreach (var item in listaPrioridad)
                     {
                         if (!itemsAlreadyInList.Contains(item[0]) && !itemsAlreadyInTerminada.Contains(item[0]))
                         {
@@ -474,46 +482,6 @@ namespace FinalTestProgra3
 
         private void SetearNombres(string nombre, int maximoValorPro)
         {
-            if (label9.Text == "Proceso 1")
-            {
-                label9.Text = nombre;
-               
-            }
-            else if (label10.Text == "Proceso 2")
-            {
-                label10.Text = nombre;
-                
-            }
-            else if (label11.Text == "Proceso 3")
-            {
-                label11.Text = nombre;
-                
-            }
-            else if (label12.Text == "Proceso 4")
-            {
-                label12.Text = nombre;
-                
-            }
-            else if (label13.Text == "Proceso 5")
-            {
-                label13.Text = nombre;
-               
-            }
-            else if (label14.Text == "Proceso 6")
-            {
-                label14.Text = nombre;
-               
-            }
-            else if (label15.Text == "Proceso 7")
-            {
-                label15.Text = nombre;
-                
-            }
-            else if (label16.Text == "Proceso 8")
-            {
-                label16.Text = nombre;
-                
-            }
 
         }
 
@@ -550,6 +518,18 @@ namespace FinalTestProgra3
         private void label10_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            procesadores.SelectedIndex = 0;
+            memoria.SelectedIndex = 0;
+            numericUpDown3.Value = 1;
+            dataGridView2.DataSource = "";
+            dataGridView3.DataSource = "";
+            dataGridView4.DataSource = "";
+            dataGridView5.DataSource = "";
+            textBox1.Text = "";
         }
     }
 }
