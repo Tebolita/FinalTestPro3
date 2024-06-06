@@ -395,7 +395,7 @@ namespace FinalTestProgra3
         private void TareasProcesosAsync()
         {
             //comparar = comparar.Replace("-->", "").Trim();
-            for (int j = configCiclos; 0 <= j; j--)
+            for (int j = (configCiclos-1); 0 <= j; j--)
             {
 
                 for (int i = 0; i < listaNodo.Count; i++)
@@ -410,7 +410,7 @@ namespace FinalTestProgra3
                             //procesosAEjecutar.Remove(procesosAEjecutar[i]);
                             AsignarProcesos(false, i);
                             contarProcesos[i] = 0;
-                            break;
+                            i -= 1;
                         }
                         else
                         {
@@ -431,7 +431,6 @@ namespace FinalTestProgra3
                             listaNodo[i][0] = listaNodo[i][0] + " -> quedo pendiente en el proceso " + i;
                             listaPendiente.Add(listaNodo[i]);
 
-                            
                         }
                         else if (contarProcesos[i] == 0)
                         {
